@@ -7,10 +7,11 @@
   padding-top: 5px;
   float: left;
 }
+
 #page-builder-fixed {
   padding-top: 25px;
   float: left;
-  width: 746px;
+  width: 100%;
 }
 
 #page-builder {

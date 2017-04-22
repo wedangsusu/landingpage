@@ -1,34 +1,26 @@
-angular.module('landingpage', [])
-  .controller('LandingPageController', function() {
+angular.module('landingpage', ['angularUtils.directives.dirPagination'])
+  .controller('LandingPageController', function($scope) {
     var todoList = this;
-    todoList.todos = [
-      {text:'learn angular', done:true},
-      {text:'build an angular app', done:false}];
- 
-    todoList.addTodo = function() {
-      todoList.todos.push({text:todoList.todoText, done:false});
-      todoList.todoText = '';
-    };
- 
-    todoList.remaining = function() {
-      var count = 0;
-      angular.forEach(todoList.todos, function(todo) {
-        count += todo.done ? 0 : 1;
-      });
-      return count;
-    };
 
-    todoList.selectedTemplate = function(){
+    $scope.currentPage = 1;
+    $scope.pageSize = 10;
+    $scope.meals = [];
+
+    $scope.todos = [];
+
+    for (var i = 1; i <= 100; i++) {
+      $scope.todos.push('meal ' + i);
+    }
+ 
+    
+    $scope.selectedTemplate = function(){
       jQuery('.nav-tabs > .active').next('li').find('a').trigger('click');
     };
- 
-    todoList.archive = function() {
-      var oldTodos = todoList.todos;
-      todoList.todos = [];
-      angular.forEach(oldTodos, function(todo) {
-        if (!todo.done) todoList.todos.push(todo);
-      });
+
+    $scope.pageChangeHandler = function(num) {
+        console.log('meals page changed to ' + num);
     };
+ 
   })
 
   .directive('componenttemplate', function() {
